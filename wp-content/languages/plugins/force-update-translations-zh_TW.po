@@ -1,0 +1,49 @@
+# Translation of Plugins - Force Update Translations - Stable (latest release) in Chinese (Taiwan)
+# This file is distributed under the same license as the Plugins - Force Update Translations - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2021-06-22 18:54:58+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/4.0.0-alpha.1\n"
+"Language: zh_TW\n"
+"Project-Id-Version: Plugins - Force Update Translations - Stable (latest release)\n"
+
+#. Translators: %s: parameter
+#: inc/plugins.php:63
+msgid "Invalid parameter: %s"
+msgstr "無效的參數: %s"
+
+#: inc/plugins.php:31 inc/themes.php:23 inc/themes.php:24
+msgid "Update translation"
+msgstr "更新語言套件"
+
+#. translators: combined name for locales: 1: name in English, 2: native name
+#: lib/glotpress/locales.php:86
+msgctxt "locales"
+msgid "%1$s/%2$s"
+msgstr "%1$s (%2$s)"
+
+#. translators: %s: Translation file.
+#: force-update-translations.php:92
+msgid "Cannot get source file: %s"
+msgstr "無法取得來源檔案: %s"
+
+#. translators: %s: Translation file.
+#: force-update-translations.php:45
+msgid "Translation files have been downloaded: %s"
+msgstr "語言套件已下載: %s"
+
+#. Author of the plugin
+msgid "Mayo Moriyama"
+msgstr "Mayo Moriyama"
+
+#. Description of the plugin
+msgid "Download WordPress theme/plugin translations and apply them to your site manually even if their language pack haven't been released or reviewed on translate.wordpress.org"
+msgstr "這個外掛能下載 WordPress 佈景主題/外掛語言套件。即使語言套件在 translate.wordpress.org 上仍未發佈或未經審閱，仍可在網站上手動套用語言套件。"
+
+#. Plugin Name of the plugin
+msgid "Force Update Translations"
+msgstr "Force Update Translations"
