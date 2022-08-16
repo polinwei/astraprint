@@ -5,15 +5,18 @@
 	flex-flow: wrap;
 	padding: 0;
 	position: relative;
+	box-sizing: border-box;
+	grid-gap: 8px;
+	width: fit-content;
 }
-
+.cfvsw-swatches-container * {
+	box-sizing: border-box;
+}
 .cfvsw-swatches-option {
 	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	box-sizing: border-box;
-	margin: 4px;
 	-webkit-transition: 200ms;
 	transition: 200ms;
 	text-align: center;
@@ -22,7 +25,7 @@
 	cursor: pointer;
 	border: 1px solid #fff;
 	background: #fff;
-	padding: 1.5px;
+	padding: 1px;
 	user-select: none; /* supported by Chrome and Opera */
 	-webkit-user-select: none; /* Safari */
 	-khtml-user-select: none; /* Konqueror HTML */
@@ -37,8 +40,8 @@
 
 .cfvsw-swatches-option .cfvsw-swatch-inner {
 	display: flex;
-	width: 100%;
-	height: 100%;
+	width: calc( 100% - 2px );
+	height: calc( 100% - 2px );
 	border-radius: inherit;
 	-webkit-transition: 200ms;
 	transition: 200ms;
@@ -126,7 +129,6 @@
 	border-radius: 5px;
 	font-size: 0.8em;
 	left: 50%;
-	/* bottom: calc( 100% + 2px ); */
 	transform: translateX( -50% ) translateY( -50% );
 	display: none;
 	border: 1px solid;
@@ -163,7 +165,9 @@
 }
 
 /*  Shop page settings */
-
+table.cfvsw-shop-variations {
+	width: 100%;
+}
 table.cfvsw-shop-variations,
 .cfvsw-shop-variations tbody,
 .cfvsw-shop-variations td,
@@ -177,41 +181,15 @@ table.cfvsw-shop-variations,
 	text-align: left;
 }
 
-.cfvsw_shop_align_left table tr td .cfvsw-swatches-option {
-	margin: 1px 8px 4px 0;
+.cfvsw-shop-variations tr td {
+	display: flex;
 }
-
-.cfvsw_shop_align_center table {
-	margin: 0 auto;
-}
-
 .cfvsw_shop_align_center table tr td {
-	display: table;
-	margin: 0 auto !important;
+	justify-content: center;
 }
-
-.cfvsw_shop_align_center table tr td .cfvsw-swatches-option {
-	margin: 1px 2px 4px;
-}
-
-.cfvsw_shop_align_right {
-	display: inline-block;
-	width: 100%;
-}
-
-.cfvsw_shop_align_right table {
-	float: right;
-}
-
 .cfvsw_shop_align_right table tr td {
-	display: table;
-	float: right;
+	justify-content: flex-end;
 }
-
-.cfvsw_shop_align_right table tr td .cfvsw-swatches-option {
-	margin: 1px 0 4px 4px;
-}
-
 .cfvsw-shop-variations .reset_variations {
 	display: none !important;
 }
@@ -247,6 +225,7 @@ table.cfvsw-shop-variations,
 /* Filters css */
 .cfvsw-filters {
 	display: flex;
+	flex-wrap: wrap;
 }
 .cfvsw-filters li {
 	display: inline-flex;
@@ -312,8 +291,7 @@ table.cfvsw-shop-variations,
 
 /* Astra theme compatibility css */
 .theme-astra table.variations td.value {
-	display: table;
-	/* padding: 5px 0; */
+	padding: 5px 0 !important;
 }
 
 .theme-astra.cfvsw-product-page tr th.label {

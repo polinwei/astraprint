@@ -3,7 +3,7 @@ Contributors: brainstormforce
 Tags: woocommerce variation swatches, woocommerce attributes, woocommerce variation, product attributes, product color, product size, variable product attributes, variation product swatches, color variation swatch, image variation swatch
 Requires at least: 5.4
 Tested up to: 6.0.1
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -18,7 +18,7 @@ Make it faster and easier for your buyers to choose product variations visually.
 
 There are no complicated settings or configuration needed to start using Variation Swatches for WooCommerce.
 
-[youtube https://www.youtube.com/watch?v=94OJz6lu_HE]
+[youtube https://www.youtube.com/watch?v=mjXCkw7rt2Y]
 
 Instantly convert traditional dropdown attributes to visually appealing swatches. This plugin provides options to convert woocommerce variation attributes to swatches. We provide multiple options like image, color, label type swatches for both product page and shop page.
 
@@ -30,6 +30,7 @@ Learn more from our [knowledge base.](https://cartflows.com/docs/variation-swatc
 
 ### Page Builders ###
 Variation Swatches works with all WordPress page builders, including:
+
 * Elementor
 * Beaver Builder
 * Brizy Builder
@@ -43,6 +44,7 @@ Variation Swatches works with all WordPress page builders, including:
 
 ### WooCommerce Themes ###
 Variation Swatches works with any theme, including:
+
 * Astra
 * Avada
 * Blocksy
@@ -104,6 +106,12 @@ Yes, this plugin enables variation swatches on shop / archieve page. User can se
 2. Multiple options for swatches available
 
 == Changelog ==
+
+= 1.0.2 – TUESDAY, 9th AUGUST 2022 =
+* Feature - Customize variation swatches from the edit product page.
+* Improvement - Updated swatches' spacing.
+* Improvement - Maintain swatches order on frontend as per settings.
+* Improvement - Added RTL support for the settings page.
 
 = 1.0.1 – THURSDAY, 21st JULY 2022 =
 * Improvement - Support for Astra upsells on cart page.

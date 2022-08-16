@@ -78,6 +78,63 @@ class Helper {
 	}
 
 	/**
+	 * Sanitize multi-dimension array.
+	 *
+	 * @param string $function Function reference.
+	 * @param array  $data_array Array what we need to sanitize.
+	 * @return array
+	 * @since  1.0.2
+	 */
+	public function sanitize_recursively( $function, $data_array ) {
+		$response = [];
+		foreach ( $data_array as $key => $data ) {
+			$response[ $key ] = is_array( $data ) ? $this->sanitize_recursively( $function, $data ) : $function( $data );
+		}
+
+		return $response;
+	}
+
+	/**
+	 * Remove blank array.
+	 *
+	 * @param string $array It is important to variable should be array.
+	 * @return array
+	 * @since  1.0.2
+	 */
+	public function remove_blank_array( $array ) {
+		if ( empty( $array ) || ! is_array( $array ) ) {
+			return $array;
+		}
+		foreach ( $array as $key => &$value ) {
+			if ( empty( $value ) ) {
+				unset( $array[ $key ] );
+			} else {
+				if ( is_array( $value ) ) {
+					$value = $this->remove_blank_array( $value );
+					if ( empty( $value ) ) {
+						unset( $array[ $key ] );
+					}
+				}
+			}
+		}
+		return $array;
+	}
+
+	/**
+	 * Create slug.
+	 *
+	 * @param string $str Pass string.
+	 * @return string
+	 * @since  1.0.2
+	 */
+	public function create_slug( $str ) {
+		if ( empty( $str ) ) {
+			return false;
+		}
+		return strtolower( trim( preg_replace( '/[^A-Za-z0-9-]+/', '-', $str ) ) );
+	}
+
+	/**
 	 * Get option value from database and retruns value merged with default values
 	 *
 	 * @param string $option option name to get value from.

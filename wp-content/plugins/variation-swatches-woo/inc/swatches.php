@@ -41,6 +41,22 @@ class Swatches {
 	private $settings = [];
 
 	/**
+	 * Post meta variation swatches type.
+	 *
+	 * @var boolean
+	 * @since  1.0.2
+	 */
+	private $product_option_type = false;
+
+	/**
+	 * Postmeta variation attributes swatches value product lavel.
+	 *
+	 * @var array
+	 * @since  1.0.2
+	 */
+	private $product_option_swatches = [];
+
+	/**
 	 * Constructor
 	 *
 	 * @since  1.0.0
@@ -55,7 +71,7 @@ class Swatches {
 		}
 
 		if (
-		$this->settings[ CFVSW_GLOBAL ]['enable_swatches'] || $this->settings[ CFVSW_GLOBAL ]['enable_swatches_shop']
+			$this->settings[ CFVSW_GLOBAL ]['enable_swatches'] || $this->settings[ CFVSW_GLOBAL ]['enable_swatches_shop']
 		) {
 			add_filter( 'woocommerce_dropdown_variation_attribute_options_html', [ $this, 'variation_attribute_custom_html' ], 999, 2 );
 			add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
@@ -72,21 +88,121 @@ class Swatches {
 	}
 
 	/**
-	 * Generates variation attributes for different types of swatches
+	 * Get swatches postmeta options.
 	 *
-	 * @param string $select_html old select html populated by WooCommerce.
-	 * @param array  $args variation arguments.
+	 * @param integer $product_id Product id.
+	 * @param array   $args_attribute Attribute arguments.
+	 * @param boolean $attribute_id Attribute id.
+	 * @return void
+	 * @since  1.0.2
+	 */
+	public function get_product_swatches( $product_id, $args_attribute, $attribute_id ) {
+		// Clean variables.
+		if ( $this->product_option_type ) {
+			$this->product_option_type     = false;
+			$this->product_option_swatches = [];
+		}
+		$product_meta_slug = $attribute_id ? CFVSW_PRODUCT_ATTR . '_' . $args_attribute : CFVSW_PRODUCT_ATTR . '_' . $this->helper->create_slug( $args_attribute );
+		$get_meta_options  = get_post_meta( $product_id, $product_meta_slug, true );
+		if ( empty( $get_meta_options['type'] ) ) {
+			return;
+		}
+		$this->product_option_type = $get_meta_options['type'];
+		unset( $get_meta_options['type'] );
+		if ( count( $get_meta_options ) > 0 ) {
+			if ( 'image' === $this->product_option_type ) {
+				foreach ( $get_meta_options as $key => $value ) {
+					if ( empty( $value[ $this->product_option_type ] ) ) {
+						continue;
+					}
+					$image_id      = intval( $value[ $this->product_option_type ] );
+					$get_image_url = $image_id ? wp_get_attachment_url( $image_id ) : false;
+					if ( ! $get_image_url ) {
+						continue;
+					}
+					$this->product_option_swatches[ $key ] = $get_image_url;
+				}
+			} else {
+				foreach ( $get_meta_options as $key => $value ) {
+					if ( empty( $value[ $this->product_option_type ] ) ) {
+						continue;
+					}
+					$custom_product_meta                   = $value[ $this->product_option_type ];
+					$this->product_option_swatches[ $key ] = $custom_product_meta;
+				}
+			}
+		}
+	}
+
+	/**
+	 * Get attribute term color.
+	 *
+	 * @param integer $attr_id Attribute id.
+	 * @param string  $slug Term slug.
+	 * @param string  $args Attribute options.
+	 * @param string  $for It should be color or image.
+	 * @return array
+	 * @since  1.0.2
+	 */
+	public function get_attr_term_color_image( $attr_id, $slug, $args, $for ) {
+		$default_value = 'color' === $for ? '#fff' : CFVSW_URL . '/admin/assets/img/wc-placeholder.png';
+		$term_name     = $slug;
+		if ( $attr_id ) {
+			$term = get_term_by( 'slug', $slug, $args['attribute'] );
+			if ( $this->product_option_type ) {
+				$get_value = ! empty( $this->product_option_swatches[ $term->term_id ] ) ? $this->product_option_swatches[ $term->term_id ] : $default_value;
+			} else {
+				$meta_name = 'color' === $for ? 'cfvsw_color' : 'cfvsw_image';
+				$get_value = get_term_meta( $term->term_id, $meta_name, true );
+			}
+			$term_name = $term->name;
+		} else {
+			$get_value_by_slug = $this->helper->create_slug( $slug );
+			$get_value         = ! empty( $this->product_option_swatches[ $get_value_by_slug ] ) ? $this->product_option_swatches[ $get_value_by_slug ] : $default_value;
+		}
+		$return = [
+			'term_name' => $term_name,
+			$for        => $get_value,
+		];
+		return $return;
+	}
+
+	/**
+	 * Get attribute term label.
+	 *
+	 * @param integer $attr_id Attribute id.
+	 * @param string  $slug Term slug.
+	 * @param string  $args Attribute options.
+	 * @return string
+	 * @since  1.0.2
+	 */
+	public function get_attr_term_label( $attr_id, $slug, $args ) {
+		$term = get_term_by( 'slug', $slug, $args['attribute'] );
+		$name = ! empty( $term->name ) ? $term->name : $slug;
+		if ( $attr_id && $this->product_option_type ) {
+			$name = ! empty( $this->product_option_swatches[ $term->term_id ] ) ? $this->product_option_swatches[ $term->term_id ] : $name;
+		} elseif ( $this->product_option_type ) {
+			$get_label_slug = $this->helper->create_slug( $slug );
+			$name           = ! empty( $this->product_option_swatches[ $get_label_slug ] ) ? $this->product_option_swatches[ $get_label_slug ] : $name;
+		}
+		return $name;
+	}
+
+	/**
+	 * Return variation product attributes.
+	 *
+	 * @param string $select_html Default attribute template.
+	 * @param array  $args Attributes settings options.
 	 * @return string
 	 * @since  1.0.0
 	 */
 	public function variation_attribute_custom_html( $select_html, $args ) {
+		global $product;
 		$settings        = [];
 		$container_class = '';
-
 		if ( ! $this->is_required_page() ) {
 			return $select_html;
 		}
-
 		if ( $this->requires_shop_settings() ) {
 			if ( ! $this->settings[ CFVSW_GLOBAL ]['enable_swatches_shop'] ) {
 				return $select_html;
@@ -98,7 +214,6 @@ class Swatches {
 			}
 			$container_class = 'cfvsw-shop-container';
 		}
-
 		if ( $this->requires_global_settings() ) {
 			if ( ! $this->settings[ CFVSW_GLOBAL ]['enable_swatches'] ) {
 				return $select_html;
@@ -110,8 +225,8 @@ class Swatches {
 		if ( empty( $settings ) ) {
 			return $select_html;
 		}
-
-		$attr_id       = wc_attribute_taxonomy_id_by_name( $args['attribute'] );
+		$attribute     = $product->get_attributes();
+		$attr_id       = isset( $attribute[ strtolower( $args['attribute'] ) ] ) ? $attribute[ strtolower( $args['attribute'] ) ]->get_id() : 0;
 		$shape         = get_option( "cfvsw_product_attribute_shape-$attr_id", 'default' );
 		$size          = absint( get_option( "cfvsw_product_attribute_size-$attr_id", '' ) );
 		$height        = absint( get_option( "cfvsw_product_attribute_height-$attr_id", '' ) );
@@ -144,47 +259,50 @@ class Swatches {
 				break;
 		}
 
-		$type = $this->helper->get_attr_type_by_name( $args['attribute'] );
-		$html = '';
+		$product_id = ! empty( $args['product'] ) ? intval( $args['product']->get_id() ) : false;
 
-		$limit = isset( $settings['limit'] ) ? intval( $settings['limit'] ) : 0;
-		$more  = '';
-		if ( $limit > 0 && $limit < count( $args['options'] ) && in_array( $type, [ 'color', 'image', 'label' ], true ) ) {
-			$permalink = get_permalink( $args['id'] );
-			/* translators: %1$1s, %3$3s: Html Tag, %2$2s: Extra attribute count */
-			$more            = sprintf( __( '%1$1s %2$2s More %3$3s', 'variation-swatches-woo' ), '<a href="' . esc_url( $permalink ) . '">', ( count( $args['options'] ) - $limit ), '</a>' );
-			$args['options'] = array_splice( $args['options'], 0, $limit );
+		if ( $product_id ) {
+			$this->get_product_swatches( $product_id, $args['attribute'], $attr_id );
 		}
+		$type = $this->product_option_type ? $this->product_option_type : $this->helper->get_attr_type_by_name( $args['attribute'] );
+
+		$limit            = isset( $settings['limit'] ) ? intval( $settings['limit'] ) : 0;
+		$attr_options_mix = $this->get_attr_option_by_sorting( $product_id, $args['attribute'], $limit, $args['options'] );
+		$attr_options     = $attr_options_mix['options'];
+		$more             = $attr_options_mix['more'];
+
 		switch ( $type ) {
 			case 'color':
 				$html = "<div class='cfvsw-swatches-container " . esc_attr( $container_class ) . "'>";
-				foreach ( $args['options'] as $slug ) {
-					$term        = get_term_by( 'slug', $slug, $args['attribute'] );
-					$color       = get_term_meta( $term->term_id, 'cfvsw_color', true );
-					$tooltip     = $settings['tooltip'] ? $term->name : '';
-					$style       = '';
-					$style      .= 'min-width:' . $min_width . ';';
-					$style      .= 'min-height:' . $min_height . ';';
-					$style      .= 'border-radius:' . $border_radius . ';';
-					$inner_style = 'background-color:' . $color . ';';
-					$html       .= "<div class='cfvsw-swatches-option' data-slug='" . esc_attr( $slug ) . "' data-title='" . esc_attr( $term->name ) . "' data-tooltip='" . esc_attr( $tooltip ) . "' style=" . esc_attr( $style ) . '><div class="cfvsw-swatch-inner" style="' . esc_attr( $inner_style ) . '"></div></div>';
+				foreach ( $attr_options as $slug ) {
+					$get_term_data = $this->get_attr_term_color_image( $attr_id, $slug, $args, 'color' );
+					$term_name     = $get_term_data['term_name'];
+					$color         = $get_term_data['color'];
+					$tooltip       = $settings['tooltip'] ? $term_name : '';
+					$style         = '';
+					$style        .= 'min-width:' . $min_width . ';';
+					$style        .= 'min-height:' . $min_height . ';';
+					$style        .= 'border-radius:' . $border_radius . ';';
+					$inner_style   = 'background-color:' . $color . ';';
+					$html         .= "<div class='cfvsw-swatches-option' data-slug='" . esc_attr( $slug ) . "' data-title='" . esc_attr( $term_name ) . "' data-tooltip='" . esc_attr( $tooltip ) . "' style=" . esc_attr( $style ) . '><div class="cfvsw-swatch-inner" style="' . esc_attr( $inner_style ) . '"></div></div>';
 				}
 				$html .= $more ? '<span class="cfvsw-more-link" style="line-height:' . esc_attr( $min_height ) . '">' . $more . '</span' : '';
 				$html .= '</div>';
 				break;
 			case 'image':
 				$html = "<div class='cfvsw-swatches-container " . esc_attr( $container_class ) . "'>";
-				foreach ( $args['options'] as $slug ) {
-					$term        = get_term_by( 'slug', $slug, $args['attribute'] );
-					$image       = get_term_meta( $term->term_id, 'cfvsw_image', true );
-					$tooltip     = $settings['tooltip'] ? $term->name : '';
-					$style       = '';
-					$style      .= 'min-width:' . $min_width . ';';
-					$style      .= 'min-height:' . $min_height . ';';
-					$style      .= 'border-radius:' . $border_radius . ';';
-					$inner_style = "background-image:url('" . esc_url( $image ) . "');background-size:cover;";
-					$html       .= "<div class='cfvsw-swatches-option cfvsw-image-option' data-slug='" . esc_attr( $slug ) . "' data-title='" . esc_attr( $term->name ) . "' data-tooltip='" . esc_attr( $tooltip ) . "' style=" . esc_attr( $style ) . '>';
-					$html       .= '<div class="cfvsw-swatch-inner" style="' . $inner_style . '"></div></div>';
+				foreach ( $attr_options as $slug ) {
+					$get_term_data = $this->get_attr_term_color_image( $attr_id, $slug, $args, 'image' );
+					$term_name     = $get_term_data['term_name'];
+					$image         = $get_term_data['image'];
+					$tooltip       = $settings['tooltip'] ? $term_name : '';
+					$style         = '';
+					$style        .= 'min-width:' . $min_width . ';';
+					$style        .= 'min-height:' . $min_height . ';';
+					$style        .= 'border-radius:' . $border_radius . ';';
+					$inner_style   = "background-image:url('" . esc_url( $image ) . "');background-size:cover;";
+					$html         .= "<div class='cfvsw-swatches-option cfvsw-image-option' data-slug='" . esc_attr( $slug ) . "' data-title='" . esc_attr( $term_name ) . "' data-tooltip='" . esc_attr( $tooltip ) . "' style=" . esc_attr( $style ) . '>';
+					$html         .= '<div class="cfvsw-swatch-inner" style="' . $inner_style . '"></div></div>';
 				}
 				$html .= $more ? '<span class="cfvsw-more-link" style="line-height:' . esc_attr( $min_height ) . '">' . $more . '</span' : '';
 				$html .= '</div>';
@@ -194,13 +312,12 @@ class Swatches {
 					break;
 				}
 				$html = "<div class='cfvsw-swatches-container " . esc_attr( $container_class ) . "'>";
-				foreach ( $args['options'] as $slug ) {
+				foreach ( $attr_options as $slug ) {
 					$style  = '';
-					$term   = get_term_by( 'slug', $slug, $args['attribute'] );
 					$style .= 'min-width:' . $min_width . ';';
 					$style .= 'min-height:' . $min_height . ';';
 					$style .= 'border-radius:' . $border_radius . ';';
-					$name   = ! empty( $term->name ) ? $term->name : $slug;
+					$name   = $this->get_attr_term_label( $attr_id, $slug, $args );
 					$html  .= "<div class='cfvsw-swatches-option cfvsw-label-option' data-slug='" . esc_attr( $slug ) . "' data-title='" . esc_attr( $name ) . "' style=" . esc_attr( $style ) . '><div class="cfvsw-swatch-inner">' . esc_html( $name ) . '</div></div>';
 				}
 				$html .= $more ? '<span class="cfvsw-more-link" style="line-height:' . esc_attr( $min_height ) . '">' . $more . '</span' : '';
@@ -212,6 +329,44 @@ class Swatches {
 			return '<div class="cfvsw-hidden-select">' . $select_html . '</div>' . $html;
 		}
 		return $select_html;
+	}
+
+	/**
+	 * Get attribute options.
+	 *
+	 * @param integer $product_id Current product id.
+	 * @param string  $attribute Attribute slug.
+	 * @param integer $limit Show swatches limit.
+	 * @param integer $options For custom attribute options.
+	 * @return array
+	 * @since  1.0.2
+	 */
+	public function get_attr_option_by_sorting( $product_id, $attribute, $limit, $options ) {
+		$attr_terms = wc_get_product_terms( $product_id, $attribute, [ 'fields' => 'all' ] );
+		if ( ! empty( $attr_terms ) ) {
+			$attr_terms = array_map(
+				function ( $value ) {
+					return $value->slug;
+				},
+				$attr_terms
+			);
+			$attr_terms = array_intersect( $attr_terms, $options );
+		} else {
+			$attr_terms = $options;
+		}
+		if ( $limit > 0 && $limit < count( $attr_terms ) ) {
+			$permalink = get_permalink( $product_id );
+			/* translators: %1$1s, %3$3s: Html Tag, %2$2s: Extra attribute count */
+			$more = sprintf( __( '%1$1s %2$2s More %3$3s', 'variation-swatches-woo' ), '<a href="' . esc_url( $permalink ) . '">', ( count( $attr_terms ) - $limit ), '</a>' );
+			return [
+				'options' => array_splice( $attr_terms, 0, $limit ),
+				'more'    => $more,
+			];
+		}
+		return [
+			'options' => $attr_terms,
+			'more'    => '',
+		];
 	}
 
 	/**
@@ -252,39 +407,41 @@ class Swatches {
 		$variations_json = wp_json_encode( $available_variations );
 		$variations_attr = function_exists( 'wc_esc_json' ) ? wc_esc_json( $variations_json ) : _wp_specialchars( $variations_json, ENT_QUOTES, 'UTF-8', true );
 		?>
-			<div class="cfvsw_variations_form variations_form cfvsw_shop_align_<?php echo esc_attr( $settings['alignment'] ); ?>" data-product_variations="<?php echo esc_attr( $variations_json ); ?>" data-product_id="<?php echo absint( $product->get_id() ); ?>" data-product_variations="<?php echo $variations_attr; //phpcs:ignore ?>">
-
+		<div class="cfvsw_variations_form variations_form cfvsw_shop_align_<?php echo esc_attr( $settings['alignment'] ); ?>" data-product_variations="<?php echo esc_attr( $variations_json ); ?>" data-product_id="<?php echo absint( $product->get_id() ); ?>" data-product_variations="<?php echo esc_attr( $variations_attr ); ?>">
 			<?php if ( empty( $available_variations ) && false !== $available_variations ) { ?>
-					<p class="stock out-of-stock"><?php echo esc_html( apply_filters( 'woocommerce_out_of_stock_message', __( 'This product is currently out of stock and unavailable.', 'variation-swatches-woo' ) ) ); ?></p>
-				<?php } else { ?>
-					<table class="cfvsw-shop-variations variations" cellspacing="0">
-						<tbody>
-							<?php foreach ( $attributes as $attribute_name => $options ) { ?>
-								<tr>
-									<?php if ( $settings['label'] ) { ?>
-									<td class="label woocommerce-loop-product__title"><label for="<?php echo esc_attr( sanitize_title( $attribute_name ) ); ?>"><?php echo wc_attribute_label( $attribute_name ); //phpcs:ignore ?></label></td>
-									<?php } ?>
-								</tr>
-								<tr>
-									<td class="value">
-										<?php
-											wc_dropdown_variation_attribute_options(
-												array(
-													'options'   => $options,
-													'attribute' => $attribute_name,
-													'product'   => $product,
-												)
-											);
-											echo end( $attribute_keys ) === $attribute_name ? wp_kses_post( apply_filters( 'woocommerce_reset_variations_link', '<a class="reset_variations" href="#">' . esc_html__( 'Clear', 'variation-swatches-woo' ) . '</a>' ) ) : '';
-										?>
+				<p class="stock out-of-stock"><?php echo esc_html( apply_filters( 'woocommerce_out_of_stock_message', __( 'This product is currently out of stock and unavailable.', 'variation-swatches-woo' ) ) ); ?></p>
+			<?php } else { ?>
+				<table class="cfvsw-shop-variations variations" cellspacing="0">
+					<tbody>
+						<?php foreach ( $attributes as $attribute_name => $options ) { ?>
+							<tr>
+								<?php if ( $settings['label'] ) { ?>
+									<td class="label woocommerce-loop-product__title"><label for="<?php echo esc_attr( sanitize_title( $attribute_name ) ); ?>">
+											<?php echo esc_html( wc_attribute_label( $attribute_name ) ); ?>
+										</label>
 									</td>
-								</tr>
-							<?php } ?>
-						</tbody>
-					</table>
-				<?php } ?>
-			</div>
-			<?php
+								<?php } ?>
+							</tr>
+							<tr>
+								<td class="value">
+									<?php
+									wc_dropdown_variation_attribute_options(
+										array(
+											'options'   => $options,
+											'attribute' => $attribute_name,
+											'product'   => $product,
+										)
+									);
+									echo end( $attribute_keys ) === $attribute_name ? wp_kses_post( apply_filters( 'woocommerce_reset_variations_link', '<a class="reset_variations" href="#">' . esc_html__( 'Clear', 'variation-swatches-woo' ) . '</a>' ) ) : '';
+									?>
+								</td>
+							</tr>
+						<?php } ?>
+					</tbody>
+				</table>
+			<?php } ?>
+		</div>
+		<?php
 	}
 
 
@@ -299,14 +456,14 @@ class Swatches {
 			return;
 		}
 
-		wp_register_style( 'cfvsw_swatches', CFVSW_URL . 'assets/css/swatches.css', [ 'dashicons' ], CFVSW_VER );
-		wp_enqueue_style( 'cfvsw_swatches' );
+		wp_register_style( 'cfvsw_swatches_product', CFVSW_URL . 'assets/css/swatches.css', [ 'dashicons' ], CFVSW_VER );
+		wp_enqueue_style( 'cfvsw_swatches_product' );
 		$this->inline_css();
 
-		wp_register_script( 'cfvsw_swatches', CFVSW_URL . 'assets/js/swatches.js', [ 'jquery' ], CFVSW_VER, true );
-		wp_enqueue_script( 'cfvsw_swatches' );
+		wp_register_script( 'cfvsw_swatches_product', CFVSW_URL . 'assets/js/swatches.js', [ 'jquery' ], CFVSW_VER, true );
+		wp_enqueue_script( 'cfvsw_swatches_product' );
 		wp_localize_script(
-			'cfvsw_swatches',
+			'cfvsw_swatches_product',
 			'cfvsw_swatches_settings',
 			[
 				'ajax_url'               => admin_url( 'admin-ajax.php' ),
@@ -353,7 +510,7 @@ class Swatches {
 		$custom_css .= '}';
 
 		if ( ! empty( $custom_css ) ) {
-			wp_add_inline_style( 'cfvsw_swatches', $custom_css );
+			wp_add_inline_style( 'cfvsw_swatches_product', $custom_css );
 		}
 	}
 
@@ -514,7 +671,6 @@ class Swatches {
 			}
 
 			WC_AJAX::get_refreshed_fragments();
-
 		} else {
 
 			// If there was an error adding to the cart, redirect to the product page to show any errors.

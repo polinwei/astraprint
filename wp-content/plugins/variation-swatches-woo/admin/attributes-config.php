@@ -79,7 +79,6 @@ class Attributes_Config {
 				]
 			);
 		}
-
 		return $fields;
 	}
 
@@ -154,7 +153,7 @@ class Attributes_Config {
 	 * @since 1.0.0
 	 */
 	public function product_attribute_shape() {
-		$id            = isset( $_GET['edit'] ) ? absint( $_GET['edit'] ) : 0; //phpcs:ignore
+		$id            = isset( $_GET['edit'] ) ? absint( $_GET['edit'] ) : 0; //phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$value         = $id ? get_option( "cfvsw_product_attribute_shape-$id" ) : '';
 		$size          = $id ? get_option( "cfvsw_product_attribute_size-$id" ) : '';
 		$height        = $id ? get_option( "cfvsw_product_attribute_height-$id" ) : '';
@@ -173,75 +172,75 @@ class Attributes_Config {
 		if ( $id > 0 ) {
 			?>
 			<tr class="form-field cfvsw-product-attribute-shape">
-			<th scope="row" valign="top">
-				<label for="cfvsw_product_attribute_shape"><?php esc_html_e( 'Shape', 'variation-swatches-woo' ); ?></label>
-			</th>
-			<td>
-			<select name="cfvsw_product_attribute_shape" id="cfvsw_product_attribute_shape">
-					<?php
-					foreach ( $shape_options as $key => $label ) {
-						$selected = ( $key === $value ) ? 'selected="selected"' : '';
-						echo '<option ' . esc_attr( $selected ) . ' value=' . esc_attr( $key ) . '>' . esc_html( $label ) . '</option>';
-					}
-					?>
-				</select>
-				<p class="description default"><?php esc_html_e( 'Default setting is applied from settings page.', 'variation-swatches-woo' ); ?></p>
-				<p class="description square"><?php esc_html_e( 'Swatch will appear as Square.', 'variation-swatches-woo' ); ?></p>
-				<p class="description rounded"><?php esc_html_e( 'Swatch will appear as Square with slight curvature at border of 3px.', 'variation-swatches-woo' ); ?></p>
-				<p class="description circle"><?php esc_html_e( 'Swatch will appear as Circle', 'variation-swatches-woo' ); ?></p>
-				<p class="description custom"><?php esc_html_e( 'Create custom Swatch shape by choosing different height and width', 'variation-swatches-woo' ); ?></p>
+				<th scope="row" valign="top">
+					<label for="cfvsw_product_attribute_shape"><?php esc_html_e( 'Shape', 'variation-swatches-woo' ); ?></label>
+				</th>
+				<td>
+					<select name="cfvsw_product_attribute_shape" id="cfvsw_product_attribute_shape">
+						<?php
+						foreach ( $shape_options as $key => $label ) {
+							$selected = ( $key === $value ) ? 'selected="selected"' : '';
+							echo '<option ' . esc_attr( $selected ) . ' value=' . esc_attr( $key ) . '>' . esc_html( $label ) . '</option>';
+						}
+						?>
+					</select>
+					<p class="description default"><?php esc_html_e( 'Default setting is applied from settings page.', 'variation-swatches-woo' ); ?></p>
+					<p class="description square"><?php esc_html_e( 'Swatch will appear as Square.', 'variation-swatches-woo' ); ?></p>
+					<p class="description rounded"><?php esc_html_e( 'Swatch will appear as Square with slight curvature at border of 3px.', 'variation-swatches-woo' ); ?></p>
+					<p class="description circle"><?php esc_html_e( 'Swatch will appear as Circle', 'variation-swatches-woo' ); ?></p>
+					<p class="description custom"><?php esc_html_e( 'Create custom Swatch shape by choosing different height and width', 'variation-swatches-woo' ); ?></p>
 				</td>
-		</tr>
-		<tr class="form-field cfvsw-product-attribute-size">
-			<th scope="row" valign="top">
-				<label for="cfvsw_product_attribute_size"><?php esc_html_e( 'Size (Optional)', 'variation-swatches-woo' ); ?></label>
-			</th>
-			<td>
-				<input type="number" placeholder=24 min=1 name="cfvsw_product_attribute_size" id="cfvsw_product_attribute_size" value="<?php echo esc_attr( $size ); ?>"/>
-				<p class="description cfvsw-size"><?php esc_html_e( 'Control the size of this particular attribute. Default size  is 24px', 'variation-swatches-woo' ); ?></p>
-			</td>
-		</tr>
-		<tr class="form-field cfvsw-product-attribute-height">
-			<th scope="row" valign="top">
-				<label for="cfvsw_product_attribute_height"><?php esc_html_e( 'Height (Optional)', 'variation-swatches-woo' ); ?></label>
-			</th>
-			<td>
-				<input type="number" placeholder=24 min=1 name="cfvsw_product_attribute_height" id="cfvsw_product_attribute_height" value="<?php echo esc_attr( $height ); ?>"/>
-				<p class="description cfvsw-height"><?php esc_html_e( 'Control the height of this particular attribute. Default height  is 24px', 'variation-swatches-woo' ); ?></p>
-			</td>
-		</tr>
-		<tr class="form-field cfvsw-product-attribute-width">
-			<th scope="row" valign="top">
-				<label for="cfvsw_product_attribute_width"><?php esc_html_e( 'Width (Optional)', 'variation-swatches-woo' ); ?></label>
-			</th>
-			<td>
-				<input type="number" placeholder=24 min=1 name="cfvsw_product_attribute_width" id="cfvsw_product_attribute_width" value="<?php echo esc_attr( $width ); ?>"/>
-				<p class="description cfvsw-width"><?php esc_html_e( 'Control the width of this particular attribute. Default width  is 24px', 'variation-swatches-woo' ); ?></p>
-			</td>
-		</tr>
-		<tr class="form-field cfvsw-product-attribute-height">
-			<th scope="row" valign="top">
-				<label for="cfvsw_product_attribute_height"><?php esc_html_e( 'Height (Optional)', 'variation-swatches-woo' ); ?></label>
-			</th>
-			<td>
-				<input type="number" placeholder=30 min=1 name="cfvsw_product_attribute_height" id="cfvsw_product_attribute_height" value="<?php echo esc_attr( $height ); ?>"/>
-				<p class="description cfvsw-height"><?php esc_html_e( 'Control the height of this particular attribute. Default height  is 30px', 'variation-swatches-woo' ); ?></p>
-			</td>
-		</tr>
-		<tr class="form-field cfvsw-product-attribute-width">
-			<th scope="row" valign="top">
-				<label for="cfvsw_product_attribute_width"><?php esc_html_e( 'Width (Optional)', 'variation-swatches-woo' ); ?></label>
-			</th>
-			<td>
-				<input type="number" placeholder=30 min=1 name="cfvsw_product_attribute_width" id="cfvsw_product_attribute_width" value="<?php echo esc_attr( $width ); ?>"/>
-				<p class="description cfvsw-width"><?php esc_html_e( 'Control the width of this particular attribute. Default width  is 30px', 'variation-swatches-woo' ); ?></p>
-			</td>
-		</tr>
+			</tr>
+			<tr class="form-field cfvsw-product-attribute-size">
+				<th scope="row" valign="top">
+					<label for="cfvsw_product_attribute_size"><?php esc_html_e( 'Size (Optional)', 'variation-swatches-woo' ); ?></label>
+				</th>
+				<td>
+					<input type="number" placeholder=24 min=1 name="cfvsw_product_attribute_size" id="cfvsw_product_attribute_size" value="<?php echo esc_attr( $size ); ?>" />
+					<p class="description cfvsw-size"><?php esc_html_e( 'Control the size of this particular attribute. Default size  is 24px', 'variation-swatches-woo' ); ?></p>
+				</td>
+			</tr>
+			<tr class="form-field cfvsw-product-attribute-height">
+				<th scope="row" valign="top">
+					<label for="cfvsw_product_attribute_height"><?php esc_html_e( 'Height (Optional)', 'variation-swatches-woo' ); ?></label>
+				</th>
+				<td>
+					<input type="number" placeholder=24 min=1 name="cfvsw_product_attribute_height" id="cfvsw_product_attribute_height" value="<?php echo esc_attr( $height ); ?>" />
+					<p class="description cfvsw-height"><?php esc_html_e( 'Control the height of this particular attribute. Default height  is 24px', 'variation-swatches-woo' ); ?></p>
+				</td>
+			</tr>
+			<tr class="form-field cfvsw-product-attribute-width">
+				<th scope="row" valign="top">
+					<label for="cfvsw_product_attribute_width"><?php esc_html_e( 'Width (Optional)', 'variation-swatches-woo' ); ?></label>
+				</th>
+				<td>
+					<input type="number" placeholder=24 min=1 name="cfvsw_product_attribute_width" id="cfvsw_product_attribute_width" value="<?php echo esc_attr( $width ); ?>" />
+					<p class="description cfvsw-width"><?php esc_html_e( 'Control the width of this particular attribute. Default width  is 24px', 'variation-swatches-woo' ); ?></p>
+				</td>
+			</tr>
+			<tr class="form-field cfvsw-product-attribute-height">
+				<th scope="row" valign="top">
+					<label for="cfvsw_product_attribute_height"><?php esc_html_e( 'Height (Optional)', 'variation-swatches-woo' ); ?></label>
+				</th>
+				<td>
+					<input type="number" placeholder=30 min=1 name="cfvsw_product_attribute_height" id="cfvsw_product_attribute_height" value="<?php echo esc_attr( $height ); ?>" />
+					<p class="description cfvsw-height"><?php esc_html_e( 'Control the height of this particular attribute. Default height  is 30px', 'variation-swatches-woo' ); ?></p>
+				</td>
+			</tr>
+			<tr class="form-field cfvsw-product-attribute-width">
+				<th scope="row" valign="top">
+					<label for="cfvsw_product_attribute_width"><?php esc_html_e( 'Width (Optional)', 'variation-swatches-woo' ); ?></label>
+				</th>
+				<td>
+					<input type="number" placeholder=30 min=1 name="cfvsw_product_attribute_width" id="cfvsw_product_attribute_width" value="<?php echo esc_attr( $width ); ?>" />
+					<p class="description cfvsw-width"><?php esc_html_e( 'Control the width of this particular attribute. Default width  is 30px', 'variation-swatches-woo' ); ?></p>
+				</td>
+			</tr>
 			<?php
 		} else {
 			?>
-			<hr/>
-			<h2 class="cfvsw-attribute-section"><?php esc_html_e( 'Variation Swatches', 'variation-swatches-woo' ); ?> -  <span><a href="<?php echo esc_url( admin_url( 'admin.php?page=cfvsw_settings&path=settings' ) ); ?>" target="_blank"><?php esc_html_e( 'Settings', 'variation-swatches-woo' ); ?></a></span></h2>
+			<hr />
+			<h2 class="cfvsw-attribute-section"><?php esc_html_e( 'Variation Swatches', 'variation-swatches-woo' ); ?> - <span><a href="<?php echo esc_url( admin_url( 'admin.php?page=cfvsw_settings&path=settings' ) ); ?>" target="_blank"><?php esc_html_e( 'Settings', 'variation-swatches-woo' ); ?></a></span></h2>
 			<div class="form-field cfvsw-product-attribute-shape">
 				<label for="cfvsw_product_attribute_shape"><?php esc_html_e( 'Shape', 'variation-swatches-woo' ); ?></label>
 				<select name="cfvsw_product_attribute_shape" id="cfvsw_product_attribute_shape">
@@ -260,17 +259,17 @@ class Attributes_Config {
 			</div>
 			<div class="form-field cfvsw-product-attribute-size">
 				<label for="cfvsw_product_attribute_size"><?php esc_html_e( 'Size (Optional)', 'variation-swatches-woo' ); ?></label>
-				<input type="number" placeholder=24 min=1 name="cfvsw_product_attribute_size" id="cfvsw_product_attribute_size" value="<?php echo esc_attr( $size ); ?>"/>
+				<input type="number" placeholder=24 min=1 name="cfvsw_product_attribute_size" id="cfvsw_product_attribute_size" value="<?php echo esc_attr( $size ); ?>" />
 				<p class="description cfvsw-size"><?php esc_html_e( 'Control the size of this particular attribute. Default size is 24px', 'variation-swatches-woo' ); ?></p>
 			</div>
 			<div class="form-field cfvsw-product-attribute-height">
 				<label for="cfvsw_product_attribute_height"><?php esc_html_e( 'Height (Optional)', 'variation-swatches-woo' ); ?></label>
-				<input type="number" placeholder=24 min=1 name="cfvsw_product_attribute_height" id="cfvsw_product_attribute_height" value="<?php echo esc_attr( $height ); ?>"/>
+				<input type="number" placeholder=24 min=1 name="cfvsw_product_attribute_height" id="cfvsw_product_attribute_height" value="<?php echo esc_attr( $height ); ?>" />
 				<p class="description cfvsw-height"><?php esc_html_e( 'Control the height of this particular attribute. Default height is 24px', 'variation-swatches-woo' ); ?></p>
 			</div>
 			<div class="form-field cfvsw-product-attribute-width">
 				<label for="cfvsw_product_attribute_width"><?php esc_html_e( 'Width (Optional)', 'variation-swatches-woo' ); ?></label>
-				<input type="number" placeholder=24 min=1 name="cfvsw_product_attribute_width" id="cfvsw_product_attribute_width" value="<?php echo esc_attr( $width ); ?>"/>
+				<input type="number" placeholder=24 min=1 name="cfvsw_product_attribute_width" id="cfvsw_product_attribute_width" value="<?php echo esc_attr( $width ); ?>" />
 				<p class="description cfvsw-width"><?php esc_html_e( 'Control the width of this particular attribute. Default width is 24px', 'variation-swatches-woo' ); ?></p>
 			</div>
 

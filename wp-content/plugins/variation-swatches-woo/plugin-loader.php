@@ -10,6 +10,7 @@ namespace CFVSW;
 
 use CFVSW\Admin\Attributes_Config;
 use CFVSW\Admin\Term_Meta_Config;
+use CFVSW\Admin\Product_Config;
 use CFVSW\Admin_Core\Admin_Menu;
 use CFVSW\Inc\Swatches;
 /**
@@ -96,6 +97,7 @@ class Plugin_Loader {
 		if ( is_admin() ) {
 			Attributes_Config::get_instance();
 			Term_Meta_Config::get_instance();
+			Product_Config::get_instance();
 			Admin_Menu::get_instance();
 		}
 

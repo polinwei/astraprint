@@ -91,7 +91,6 @@ class Admin_Menu {
 		if ( 'woocommerce_page_cfvsw_settings' !== $hook ) {
 			return;
 		}
-
 		$script_asset_path = CFVSW_DIR . 'admin-core/assets/build/settings.asset.php';
 		$script_info       = file_exists( $script_asset_path )
 			? include $script_asset_path
@@ -118,6 +117,7 @@ class Admin_Menu {
 
 		wp_register_style( 'cfvsw_settings', $this->tailwind_assets . 'settings.css', [], CFVSW_VER );
 		wp_enqueue_style( 'cfvsw_settings' );
+		wp_style_add_data( 'cfvsw_settings', 'rtl', 'replace' );
 	}
 
 	/**

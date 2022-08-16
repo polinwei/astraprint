@@ -14,9 +14,10 @@
 
 			// Create the media frame.
 			fileFrame = wp.media.frames.fileFrame = wp.media( {
-				title: 'Select a image to upload',
+				title: cfvsw_swatches_term_meta.image_upload_text.title,
 				button: {
-					text: 'Use this image',
+					text:
+						cfvsw_swatches_term_meta.image_upload_text.button_title,
 				},
 				multiple: false, // Set to true to allow multiple files to be selected
 			} );

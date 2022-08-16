@@ -64,11 +64,11 @@ class Term_Meta_Config {
 		$fields_array = $this->term_meta_fields( $type );
 		if ( ! empty( $fields_array ) ) {
 			?>
-		<div class="form-field <?php echo esc_attr( $fields_array['id'] ); ?>">
-			<label for="<?php echo esc_attr( $fields_array['id'] ); ?>"><?php echo esc_html( $fields_array['label'] ); ?></label>
-			<?php $this->term_meta_fields_markup( $fields_array, $term ); ?>
-			<p class="description"><?php echo esc_attr( $fields_array['desc'] ); ?></p>
-		</div>
+			<div class="form-field <?php echo esc_attr( $fields_array['id'] ); ?>">
+				<label for="<?php echo esc_attr( $fields_array['id'] ); ?>"><?php echo esc_html( $fields_array['label'] ); ?></label>
+				<?php $this->term_meta_fields_markup( $fields_array, $term ); ?>
+				<p class="description"><?php echo esc_attr( $fields_array['desc'] ); ?></p>
+			</div>
 			<?php
 		}
 	}
@@ -85,15 +85,15 @@ class Term_Meta_Config {
 		$fields_array = $this->term_meta_fields( $type );
 		if ( ! empty( $fields_array ) ) {
 			?>
-		<tr class="form-field">
-			<th>
-				<label for="<?php echo esc_attr( $fields_array['id'] ); ?>"><?php echo esc_html( $fields_array['label'] ); ?></label>
-			</th>
-			<td>
-				<?php $this->term_meta_fields_markup( $fields_array, $term ); ?>
-				<p class="description"><?php echo esc_html( $fields_array['desc'] ); ?></p>
-			</td>
-		</tr>
+			<tr class="form-field">
+				<th>
+					<label for="<?php echo esc_attr( $fields_array['id'] ); ?>"><?php echo esc_html( $fields_array['label'] ); ?></label>
+				</th>
+				<td>
+					<?php $this->term_meta_fields_markup( $fields_array, $term ); ?>
+					<p class="description"><?php echo esc_html( $fields_array['desc'] ); ?></p>
+				</td>
+			</tr>
 			<?php
 		}
 	}
@@ -173,11 +173,11 @@ class Term_Meta_Config {
 				$value = ! empty( $value ) ? $value : '';
 				?>
 				<div class="meta-image-field-wrapper">
-					<img class="cfvsw-image-preview" height="60px" width="60px" src="<?php echo esc_url( $value ); ?>" alt="<?php esc_attr_e( 'Variation swatches image preview', 'variation-swatches-woo' ); ?>" style="<?php echo( empty( $value ) ? 'display:none' : '' ); ?>"/>
+					<img class="cfvsw-image-preview" height="60px" width="60px" src="<?php echo esc_url( $value ); ?>" alt="<?php esc_attr_e( 'Variation swatches image preview', 'variation-swatches-woo' ); ?>" style="<?php echo ( empty( $value ) ? 'display:none' : '' ); ?>" />
 					<div class="button-wrapper">
 						<input type="hidden" class="<?php echo esc_attr( $field['id'] ); ?>" name="cfvsw_image" value="<?php echo esc_attr( $value ); ?>" />
 						<button type="button" class="cfvsw_upload_image_button button button-primary button-small"><?php esc_html_e( 'Upload image', 'variation-swatches-woo' ); ?></button>
-						<button type="button" style="<?php echo( empty( $value ) ? 'display:none' : '' ); ?>" class="cfvsw_remove_image_button button button-small"><?php esc_html_e( 'Remove image', 'variation-swatches-woo' ); ?></button>
+						<button type="button" style="<?php echo ( empty( $value ) ? 'display:none' : '' ); ?>" class="cfvsw_remove_image_button button button-small"><?php esc_html_e( 'Remove image', 'variation-swatches-woo' ); ?></button>
 					</div>
 				</div>
 				<?php
@@ -207,6 +207,22 @@ class Term_Meta_Config {
 
 		wp_register_script( 'cfvsw-term-meta-type', CFVSW_URL . 'admin/assets/js/term-meta-type.js', [ 'jquery', 'wp-color-picker' ], CFVSW_VER, true );
 		wp_enqueue_script( 'cfvsw-term-meta-type' );
+		wp_localize_script(
+			'cfvsw-term-meta-type',
+			'cfvsw_swatches_term_meta',
+			[
+				'image_upload_text' => [
+					'title'        => __(
+						'Select a image to upload',
+						'variation-swatches-woo'
+					),
+					'button_title' => __(
+						'Use this image',
+						'variation-swatches-woo'
+					),
+				],
+			]
+		);
 
 		wp_register_style( 'cfvsw-term-meta', CFVSW_URL . 'admin/assets/css/term-meta.css', [], CFVSW_VER, 'all' );
 		wp_enqueue_style( 'cfvsw-term-meta' );

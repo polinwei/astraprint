@@ -1,0 +1,14 @@
+<svg width="124.45499999999998" height="37.916" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <circle id="svg_3" r="12.639" cy="17.055" cx="15.418" fill="#FF5A44" opacity="0.77"/>
+  <circle id="svg_4" r="12.638" cy="17.055" cx="30.751" fill="#F74234" opacity="0.6"/>
+  <circle id="svg_5" r="12.639" cy="29.693" cx="22.945" fill="#EF3022" opacity="0.6"/>
+  <text opacity="0.9" stroke="null" transform="matrix(1.0223233699798584,0,0,1.8870080815731027,-1.0921080985990557,-23.413838430568113) " font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Arvo, sans-serif" font-size="22" id="svg_17" y="31.60269" x="48.659833" stroke-opacity="null" stroke-width="0" fill="#415161">DEMO</text>
+ </g>
+</svg>
