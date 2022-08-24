@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WooCommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-08-10 17:54:11+0000\n"
+"PO-Revision-Date: 2022-08-19 19:58:53+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -7240,7 +7240,7 @@ msgid "Take payments with the provider that’s right for you - choose from 100+
 msgstr "透過適合你的供應商收取付款 — WooCommerce 有超過 100 種付款途徑可供選擇。"
 
 #: src/Admin/Features/Navigation/CoreMenu.php:198
-#: src/Internal/Admin/Homescreen.php:177 assets/client/admin/app/index.js:2
+#: src/Internal/Admin/Homescreen.php:184 assets/client/admin/app/index.js:2
 msgid "Home"
 msgstr "首頁"
 
@@ -20010,13 +20010,6 @@ msgstr "電子支票"
 msgid "A minimum order amount"
 msgstr "最小訂購金額"
 
-#: includes/shipping/legacy-flat-rate/includes/settings-flat-rate.php:21
-#: includes/shipping/legacy-free-shipping/class-wc-shipping-legacy-free-shipping.php:101
-#: includes/shipping/legacy-local-delivery/class-wc-shipping-legacy-local-delivery.php:119
-#: includes/shipping/legacy-local-pickup/class-wc-shipping-legacy-local-pickup.php:98
-msgid "Once disabled, this legacy method will no longer be available."
-msgstr "一但停用後，傳統的運送方式將會被取消。"
-
 #. translators: %s: Admin shipping settings URL
 #: includes/shipping/legacy-flat-rate/class-wc-shipping-legacy-flat-rate.php:37
 #: includes/shipping/legacy-free-shipping/class-wc-shipping-legacy-free-shipping.php:46
@@ -20025,6 +20018,13 @@ msgstr "一但停用後，傳統的運送方式將會被取消。"
 #: includes/shipping/legacy-local-pickup/class-wc-shipping-legacy-local-pickup.php:30
 msgid "This method is deprecated in 2.6.0 and will be removed in future versions - we recommend disabling it and instead setting up a new rate within your <a href=\"%s\">Shipping zones</a>."
 msgstr "<strong>此設定在 2.6.0 已被棄用並在未來版本中將會完全移除 - 我們建議您關閉它並在 <a href=\"%s\">運送區域</a> 中增加新的運送方式來取代目前的設定。</strong>"
+
+#: includes/shipping/legacy-flat-rate/includes/settings-flat-rate.php:21
+#: includes/shipping/legacy-free-shipping/class-wc-shipping-legacy-free-shipping.php:101
+#: includes/shipping/legacy-local-delivery/class-wc-shipping-legacy-local-delivery.php:119
+#: includes/shipping/legacy-local-pickup/class-wc-shipping-legacy-local-pickup.php:98
+msgid "Once disabled, this legacy method will no longer be available."
+msgstr "一但停用後，傳統的運送方式將會被取消。"
 
 #: includes/wc-rest-functions.php:194
 msgid "The date you provided is invalid."
@@ -20546,6 +20546,19 @@ msgstr "圖片資訊"
 msgid "Currency the order was created with, in ISO format."
 msgstr "訂單建立時所用的貨幣格式，用ISO格式。"
 
+#: includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php:1788
+#: includes/rest-api/Controllers/Version2/class-wc-rest-products-v2-controller.php:1729
+#: includes/rest-api/Controllers/Version3/class-wc-rest-products-controller.php:874
+msgid "Featured product."
+msgstr "特色商品."
+
+#: includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php:2188
+#: includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php:2520
+#: includes/rest-api/Controllers/Version2/class-wc-rest-product-variations-v2-controller.php:929
+#: includes/rest-api/Controllers/Version2/class-wc-rest-products-v2-controller.php:2144
+msgid "Image position. 0 means that the image is featured."
+msgstr "圖片位置. 0 代表此圖為特色圖片."
+
 #: includes/rest-api/Controllers/Version1/class-wc-rest-product-categories-v1-controller.php:238
 #: includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php:2172
 #: includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php:2504
@@ -20558,12 +20571,6 @@ msgstr "訂單建立時所用的貨幣格式，用ISO格式。"
 #: includes/rest-api/Controllers/Version3/class-wc-rest-products-controller.php:1279
 msgid "Image URL."
 msgstr "圖片網址."
-
-#: includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php:1788
-#: includes/rest-api/Controllers/Version2/class-wc-rest-products-v2-controller.php:1729
-#: includes/rest-api/Controllers/Version3/class-wc-rest-products-controller.php:874
-msgid "Featured product."
-msgstr "特色商品."
 
 #: includes/rest-api/Controllers/Version1/class-wc-rest-product-categories-v1-controller.php:221
 #: includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php:2155
@@ -20604,13 +20611,6 @@ msgstr "圖片名稱."
 #: packages/woocommerce-blocks/src/StoreApi/Schemas/V1/ImageAttachmentSchema.php:62
 msgid "Image alternative text."
 msgstr "圖片替代文字"
-
-#: includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php:2188
-#: includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php:2520
-#: includes/rest-api/Controllers/Version2/class-wc-rest-product-variations-v2-controller.php:929
-#: includes/rest-api/Controllers/Version2/class-wc-rest-products-v2-controller.php:2144
-msgid "Image position. 0 means that the image is featured."
-msgstr "圖片位置. 0 代表此圖為特色圖片."
 
 #: includes/rest-api/Controllers/Version1/class-wc-rest-orders-v1-controller.php:623
 #: includes/rest-api/Controllers/Version2/class-wc-rest-orders-v2-controller.php:797
@@ -20653,6 +20653,17 @@ msgstr "運送類別名稱."
 msgid "Customer's IP address."
 msgstr "客戶的IP地址"
 
+#: includes/rest-api/Controllers/Version1/class-wc-rest-order-refunds-v1-controller.php:446
+#: includes/rest-api/Controllers/Version1/class-wc-rest-orders-v1-controller.php:1330
+#: includes/rest-api/Controllers/Version1/class-wc-rest-orders-v1-controller.php:1478
+#: includes/rest-api/Controllers/Version1/class-wc-rest-orders-v1-controller.php:1543
+#: includes/rest-api/Controllers/Version2/class-wc-rest-order-refunds-v2-controller.php:495
+#: includes/rest-api/Controllers/Version2/class-wc-rest-orders-v2-controller.php:1435
+#: includes/rest-api/Controllers/Version2/class-wc-rest-orders-v2-controller.php:1652
+#: includes/rest-api/Controllers/Version2/class-wc-rest-orders-v2-controller.php:1744
+msgid "Line taxes."
+msgstr "行稅金。"
+
 #: includes/rest-api/Controllers/Version1/class-wc-rest-orders-v1-controller.php:1607
 #: includes/rest-api/Controllers/Version2/class-wc-rest-orders-v2-controller.php:1860
 msgid "List of refunds."
@@ -20678,17 +20689,6 @@ msgstr "變數 URL。"
 #: includes/rest-api/Controllers/Version3/class-wc-rest-product-variations-controller.php:458
 msgid "Current variation price."
 msgstr "目前變數價格。"
-
-#: includes/rest-api/Controllers/Version1/class-wc-rest-order-refunds-v1-controller.php:446
-#: includes/rest-api/Controllers/Version1/class-wc-rest-orders-v1-controller.php:1330
-#: includes/rest-api/Controllers/Version1/class-wc-rest-orders-v1-controller.php:1478
-#: includes/rest-api/Controllers/Version1/class-wc-rest-orders-v1-controller.php:1543
-#: includes/rest-api/Controllers/Version2/class-wc-rest-order-refunds-v2-controller.php:495
-#: includes/rest-api/Controllers/Version2/class-wc-rest-orders-v2-controller.php:1435
-#: includes/rest-api/Controllers/Version2/class-wc-rest-orders-v2-controller.php:1652
-#: includes/rest-api/Controllers/Version2/class-wc-rest-orders-v2-controller.php:1744
-msgid "Line taxes."
-msgstr "行稅金。"
 
 #: includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php:2306
 #: includes/rest-api/Controllers/Version2/class-wc-rest-product-variations-v2-controller.php:692
@@ -22003,6 +22003,22 @@ msgstr "頭像 URL."
 msgid "Address line 1."
 msgstr "首欄地址"
 
+#: includes/rest-api/Controllers/Version1/class-wc-rest-customers-v1-controller.php:748
+#: includes/rest-api/Controllers/Version1/class-wc-rest-customers-v1-controller.php:811
+#: includes/rest-api/Controllers/Version1/class-wc-rest-orders-v1-controller.php:1103
+#: includes/rest-api/Controllers/Version1/class-wc-rest-orders-v1-controller.php:1166
+msgid "Address line 2."
+msgstr "次欄地址"
+
+#: includes/rest-api/Controllers/Version1/class-wc-rest-customers-v1-controller.php:768
+#: includes/rest-api/Controllers/Version1/class-wc-rest-customers-v1-controller.php:831
+#: includes/rest-api/Controllers/Version2/class-wc-rest-customers-v2-controller.php:240
+#: includes/rest-api/Controllers/Version2/class-wc-rest-customers-v2-controller.php:303
+#: includes/rest-api/Controllers/Version3/class-wc-rest-customers-controller.php:195
+#: includes/rest-api/Controllers/Version3/class-wc-rest-customers-controller.php:258
+msgid "ISO code of the country."
+msgstr "國家 ISO 編號."
+
 #: includes/rest-api/Controllers/Version1/class-wc-rest-customers-v1-controller.php:728
 #: includes/rest-api/Controllers/Version1/class-wc-rest-customers-v1-controller.php:791
 #: includes/rest-api/Controllers/Version1/class-wc-rest-orders-v1-controller.php:1083
@@ -22028,22 +22044,6 @@ msgstr "名字."
 #: includes/rest-api/Controllers/Version3/class-wc-rest-customers-controller.php:223
 msgid "Last name."
 msgstr "姓氏."
-
-#: includes/rest-api/Controllers/Version1/class-wc-rest-customers-v1-controller.php:748
-#: includes/rest-api/Controllers/Version1/class-wc-rest-customers-v1-controller.php:811
-#: includes/rest-api/Controllers/Version1/class-wc-rest-orders-v1-controller.php:1103
-#: includes/rest-api/Controllers/Version1/class-wc-rest-orders-v1-controller.php:1166
-msgid "Address line 2."
-msgstr "次欄地址"
-
-#: includes/rest-api/Controllers/Version1/class-wc-rest-customers-v1-controller.php:768
-#: includes/rest-api/Controllers/Version1/class-wc-rest-customers-v1-controller.php:831
-#: includes/rest-api/Controllers/Version2/class-wc-rest-customers-v2-controller.php:240
-#: includes/rest-api/Controllers/Version2/class-wc-rest-customers-v2-controller.php:303
-#: includes/rest-api/Controllers/Version3/class-wc-rest-customers-controller.php:195
-#: includes/rest-api/Controllers/Version3/class-wc-rest-customers-controller.php:258
-msgid "ISO code of the country."
-msgstr "國家 ISO 編號."
 
 #: includes/admin/views/html-notice-legacy-shipping.php:27
 #: includes/admin/views/html-notice-no-shipping-methods.php:31
@@ -22166,6 +22166,12 @@ msgstr "花費總金額。"
 msgid "Quantity of orders made by the customer."
 msgstr "客戶下訂的數量。"
 
+#: includes/rest-api/Controllers/Version1/class-wc-rest-customers-v1-controller.php:680
+#: includes/rest-api/Controllers/Version2/class-wc-rest-customers-v2-controller.php:190
+#: includes/rest-api/Controllers/Version3/class-wc-rest-customers-controller.php:145
+msgid "Customer password."
+msgstr "客戶密碼。"
+
 #: includes/rest-api/Controllers/Version1/class-wc-rest-customers-v1-controller.php:763
 #: includes/rest-api/Controllers/Version1/class-wc-rest-customers-v1-controller.php:826
 #: includes/rest-api/Controllers/Version1/class-wc-rest-orders-v1-controller.php:1118
@@ -22219,12 +22225,6 @@ msgstr "城市名稱。"
 #: includes/rest-api/Controllers/Version3/class-wc-rest-customers-controller.php:228
 msgid "Company name."
 msgstr "公司名稱。"
-
-#: includes/rest-api/Controllers/Version1/class-wc-rest-customers-v1-controller.php:680
-#: includes/rest-api/Controllers/Version2/class-wc-rest-customers-v2-controller.php:190
-#: includes/rest-api/Controllers/Version3/class-wc-rest-customers-controller.php:145
-msgid "Customer password."
-msgstr "客戶密碼。"
 
 #: includes/rest-api/Controllers/Version1/class-wc-rest-customers-v1-controller.php:672
 #: includes/rest-api/Controllers/Version2/class-wc-rest-customers-v2-controller.php:182
@@ -23200,37 +23200,6 @@ msgstr "抱歉，您無法建立新資源。"
 msgid "Use WP Query arguments to modify the response; private query vars require appropriate authorization."
 msgstr "使用 WP 查詢引數來修改回應；私人查詢變數需要適當的授權。"
 
-#. translators: %s: post type
-#: includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php:1694
-#: includes/rest-api/Controllers/Version2/class-wc-rest-product-variations-v2-controller.php:541
-#: includes/rest-api/Controllers/Version2/class-wc-rest-products-v2-controller.php:1614
-#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:485
-#: includes/rest-api/Controllers/Version3/class-wc-rest-posts-controller.php:457
-msgid "The %s has already been deleted."
-msgstr "%s 已刪除。"
-
-#. translators: %s: post type
-#: includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php:1688
-#: includes/rest-api/Controllers/Version2/class-wc-rest-product-variations-v2-controller.php:530
-#: includes/rest-api/Controllers/Version2/class-wc-rest-products-v2-controller.php:1601
-#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:478
-#: includes/rest-api/Controllers/Version3/class-wc-rest-posts-controller.php:451
-msgid "The %s does not support trashing."
-msgstr "%s 支援銷毀。"
-
-#. translators: %s: post type
-#: includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php:1656
-#: includes/rest-api/Controllers/Version2/class-wc-rest-product-variations-v2-controller.php:512
-#: includes/rest-api/Controllers/Version2/class-wc-rest-products-v2-controller.php:1563
-#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:464
-#: includes/rest-api/Controllers/Version3/class-wc-rest-posts-controller.php:438
-msgid "Sorry, you are not allowed to delete %s."
-msgstr "抱歉，您無法刪除 %s。"
-
-#: includes/admin/class-wc-admin-setup-wizard.php:1606
-msgid "A simple offline gateway that lets you accept cash on delivery."
-msgstr "這是一種簡單的離線付款方式，可讓您接受貨到付款。"
-
 #: includes/rest-api/Controllers/Version1/class-wc-rest-customers-v1-controller.php:890
 #: includes/rest-api/Controllers/Version1/class-wc-rest-taxes-v1-controller.php:740
 #: includes/rest-api/Controllers/Version1/class-wc-rest-webhooks-v1-controller.php:750
@@ -23259,6 +23228,24 @@ msgstr "這是一種簡單的離線付款方式，可讓您接受貨到付款。
 #: src/Admin/API/Reports/Variations/Stats/Controller.php:358
 msgid "Order sort attribute ascending or descending."
 msgstr "以遞增或遞減來排序訂單屬性。"
+
+#. translators: %s: post type
+#: includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php:1694
+#: includes/rest-api/Controllers/Version2/class-wc-rest-product-variations-v2-controller.php:541
+#: includes/rest-api/Controllers/Version2/class-wc-rest-products-v2-controller.php:1614
+#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:485
+#: includes/rest-api/Controllers/Version3/class-wc-rest-posts-controller.php:457
+msgid "The %s has already been deleted."
+msgstr "%s 已刪除。"
+
+#. translators: %s: post type
+#: includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php:1688
+#: includes/rest-api/Controllers/Version2/class-wc-rest-product-variations-v2-controller.php:530
+#: includes/rest-api/Controllers/Version2/class-wc-rest-products-v2-controller.php:1601
+#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:478
+#: includes/rest-api/Controllers/Version3/class-wc-rest-posts-controller.php:451
+msgid "The %s does not support trashing."
+msgstr "%s 支援銷毀。"
 
 #: includes/rest-api/Controllers/Version1/class-wc-rest-customers-v1-controller.php:883
 #: includes/rest-api/Controllers/Version1/class-wc-rest-taxes-v1-controller.php:733
@@ -23316,6 +23303,19 @@ msgstr "給定 ISO8601 相容日期之前，限制已發行資源的回應。"
 #: src/Admin/API/Reports/Variations/Stats/Controller.php:336
 msgid "Limit response to resources published after a given ISO8601 compliant date."
 msgstr "給定 ISO8601 相容日期之後，限制已發行資源的回應。"
+
+#. translators: %s: post type
+#: includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php:1656
+#: includes/rest-api/Controllers/Version2/class-wc-rest-product-variations-v2-controller.php:512
+#: includes/rest-api/Controllers/Version2/class-wc-rest-products-v2-controller.php:1563
+#: includes/rest-api/Controllers/Version3/class-wc-rest-crud-controller.php:464
+#: includes/rest-api/Controllers/Version3/class-wc-rest-posts-controller.php:438
+msgid "Sorry, you are not allowed to delete %s."
+msgstr "抱歉，您無法刪除 %s。"
+
+#: includes/admin/class-wc-admin-setup-wizard.php:1606
+msgid "A simple offline gateway that lets you accept cash on delivery."
+msgstr "這是一種簡單的離線付款方式，可讓您接受貨到付款。"
 
 #: includes/rest-api/Controllers/Version3/class-wc-rest-terms-controller.php:778
 msgid "Limit result set to resources with a specific slug."
@@ -24637,10 +24637,6 @@ msgstr "移除這項商品"
 msgid "You may be interested in&hellip;"
 msgstr "您可能對此有興趣&hellip;"
 
-#: templates/cart/mini-cart.php:92
-msgid "No products in the cart."
-msgstr "購物車內無任何商品"
-
 #: includes/customizer/class-wc-shop-customizer.php:678
 #: includes/wc-template-functions.php:2206
 msgid "Checkout"
@@ -25215,6 +25211,10 @@ msgstr "點擊這裡以登入"
 msgid "Lost your password?"
 msgstr "忘記密碼？"
 
+#: templates/cart/mini-cart.php:92
+msgid "No products in the cart."
+msgstr "購物車內沒有任何商品。"
+
 #. translators: %s: order ID
 #. translators: %s: order number
 #: includes/admin/list-tables/class-wc-admin-list-table-orders.php:235
@@ -25350,6 +25350,12 @@ msgstr "複製檔案到佈景主題"
 msgid "File was not found."
 msgstr "找不到檔案。"
 
+#: includes/gateways/bacs/class-wc-gateway-bacs.php:97
+#: includes/gateways/cheque/class-wc-gateway-cheque.php:73
+#: includes/gateways/cod/class-wc-gateway-cod.php:79
+msgid "Payment method description that the customer will see on your checkout."
+msgstr "當顧客在結帳的時候將會看到的付款方式說明"
+
 #: includes/admin/importers/mappings/generic.php:21
 #: includes/admin/settings/views/html-admin-page-shipping-zone-methods.php:86
 #: includes/gateways/bacs/class-wc-gateway-bacs.php:88
@@ -25387,12 +25393,6 @@ msgstr "標題"
 #: includes/shipping/local-pickup/class-wc-shipping-local-pickup.php:82
 msgid "This controls the title which the user sees during checkout."
 msgstr "控制使用者在結帳時所看到的標題."
-
-#: includes/gateways/bacs/class-wc-gateway-bacs.php:97
-#: includes/gateways/cheque/class-wc-gateway-cheque.php:73
-#: includes/gateways/cod/class-wc-gateway-cod.php:79
-msgid "Payment method description that the customer will see on your checkout."
-msgstr "當顧客在結帳的時候將會看到的付款方式說明"
 
 #: includes/gateways/bacs/class-wc-gateway-bacs.php:102
 #: includes/gateways/cheque/class-wc-gateway-cheque.php:78
@@ -27574,6 +27574,12 @@ msgstr "您沒有權限建立這個顧客"
 msgid "Invalid customer ID"
 msgstr "無效的顧客號碼"
 
+#: includes/legacy/api/v1/class-wc-api-customers.php:441
+#: includes/legacy/api/v2/class-wc-api-customers.php:726
+#: includes/legacy/api/v3/class-wc-api-customers.php:716
+msgid "Invalid customer"
+msgstr "無效的顧客"
+
 #: includes/legacy/api/v2/class-wc-api-coupons.php:212
 #: includes/legacy/api/v2/class-wc-api-customers.php:349
 #: includes/legacy/api/v2/class-wc-api-orders.php:365
@@ -27640,12 +27646,6 @@ msgstr "缺少參數 %s"
 #: includes/legacy/api/v3/class-wc-api-webhooks.php:242
 msgid "No %1$s data specified to edit %1$s"
 msgstr "未指定 %1$s 資料用以編輯 %1$s"
-
-#: includes/legacy/api/v1/class-wc-api-customers.php:441
-#: includes/legacy/api/v2/class-wc-api-customers.php:726
-#: includes/legacy/api/v3/class-wc-api-customers.php:716
-msgid "Invalid customer"
-msgstr "無效的顧客"
 
 #: includes/legacy/api/v1/class-wc-api-customers.php:449
 #: includes/legacy/api/v2/class-wc-api-customers.php:734
@@ -27834,6 +27834,12 @@ msgstr "無法刪除商品屬性"
 msgid "You do not have permission to read this report"
 msgstr "您沒有權限讀取此一報表"
 
+#: includes/legacy/api/v1/class-wc-api-resource.php:87
+#: includes/legacy/api/v2/class-wc-api-resource.php:111
+#: includes/legacy/api/v3/class-wc-api-resource.php:119
+msgid "Invalid %s"
+msgstr "無效的 %s"
+
 #. translators: %s item name.
 #: includes/class-wc-ajax.php:1314
 #: includes/legacy/api/v1/class-wc-api-resource.php:333
@@ -27851,12 +27857,6 @@ msgstr "您沒有權限讀取此一報表"
 #: includes/legacy/api/v3/class-wc-api-taxes.php:623
 msgid "Deleted %s"
 msgstr "已刪除%s"
-
-#: includes/legacy/api/v1/class-wc-api-resource.php:87
-#: includes/legacy/api/v2/class-wc-api-resource.php:111
-#: includes/legacy/api/v3/class-wc-api-resource.php:119
-msgid "Invalid %s"
-msgstr "無效的 %s"
 
 #: includes/legacy/api/v1/class-wc-api-resource.php:95
 #: includes/legacy/api/v2/class-wc-api-resource.php:119
@@ -28385,11 +28385,6 @@ msgstr "地理位置定位"
 #: includes/admin/settings/class-wc-settings-general.php:180
 msgid "Geolocate (with page caching support)"
 msgstr " 地理位置定位 (支援頁面快取)"
-
-#: includes/customizer/class-wc-shop-customizer.php:317
-#: includes/wc-template-functions.php:1056
-msgid "This is a demo store for testing purposes &mdash; no orders shall be fulfilled."
-msgstr "這是一個測試用的範例網站 &mdash; 沒有任何訂單會被實現。"
 
 #: includes/admin/settings/class-wc-settings-general.php:223
 msgid "The following options affect how prices are displayed on the frontend."
@@ -29208,6 +29203,11 @@ msgstr "\"結帳 &rarr; 已收到訂單\" 的頁面端點。 "
 #: includes/admin/settings/class-wc-settings-advanced.php:182
 msgid "Endpoint for the \"Checkout &rarr; Pay\" page."
 msgstr "\"結帳 &rarr; 付款\" 的頁面端點。 "
+
+#: includes/customizer/class-wc-shop-customizer.php:317
+#: includes/wc-template-functions.php:1056
+msgid "This is a demo store for testing purposes &mdash; no orders shall be fulfilled."
+msgstr "這是測試用途的示範商店 &mdash; 不會處理任何訂單。"
 
 #: includes/admin/meta-boxes/views/html-product-data-inventory.php:103
 #: includes/admin/meta-boxes/views/html-variation-admin.php:264
@@ -32562,7 +32562,7 @@ msgstr "動作失敗。請更新此頁面 (F5) 並重試。"
 #: includes/customizer/class-wc-shop-customizer.php:38
 #: includes/react-admin/connect-existing-pages.php:62
 #: includes/wc-order-functions.php:1000 src/Admin/PageController.php:201
-#: src/Internal/Admin/Homescreen.php:166 src/Internal/Admin/Loader.php:388
+#: src/Internal/Admin/Homescreen.php:173 src/Internal/Admin/Loader.php:388
 #: src/Internal/Admin/Settings.php:207 templates/auth/header.php:32
 #: packages/woocommerce-blocks/assets/js/blocks/cart/index.js:33
 #: packages/woocommerce-blocks/assets/js/blocks/product-best-sellers/index.js:28
